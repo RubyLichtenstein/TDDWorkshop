@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -26,12 +27,17 @@ public class GroupsPresenterTest {
   GroupsPresenter groupsPresenter;
 
   @Before public void setUp() throws Exception {
+    MockitoAnnotations.initMocks(this);
+
     groupsPresenter = new GroupsPresenter(repository, view);
   }
 
   @Test public void loadGroups_repositoryHaveNoGroups_callViewShowNoGroupsMsg() throws Exception {
+
     //stub GroupsRepository#getGroups() to emit empty list
     Mockito.when(repository.getGroups()).thenReturn(Observable.just(new ArrayList<>()));
+
+    groupsPresenter.loadGroups();
 
     //verify call view#showNoGroupsMsg()
     Mockito.verify(view, Mockito.times(1)).showNoGroupsMsg();
@@ -42,6 +48,8 @@ public class GroupsPresenterTest {
     List<Group> groups = new ArrayList<>();
     groups.add(new Group());
     Mockito.when(repository.getGroups()).thenReturn(Observable.just(groups));
+
+    groupsPresenter.loadGroups();
 
     //verify call view#showNoGroupsMsg()
     Mockito.verify(view, Mockito.times(1)).showGroups(any());

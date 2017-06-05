@@ -19,9 +19,20 @@ public class GroupsPresenter implements GroupsMVPContract.Presenter {
     this.view = view;
   }
 
-  @Override public Observable<List<Group>> loadGroups() {
-    return null;
+  /**
+   * if groups empty view#showNoGroups
+   * if groups NOT empty view#showGroups
+   */
+  @Override public void loadGroups() {
+    groupsRepository.getGroups().subscribe(groups -> {
+      if (groups.isEmpty()) {
+        view.showNoGroupsMsg();
+      } else {
+        view.showGroups(groups);
+      }
+    });
   }
+
 
   @Override public void createGroup() {
 

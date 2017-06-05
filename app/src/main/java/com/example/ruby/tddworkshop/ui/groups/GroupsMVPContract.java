@@ -19,7 +19,7 @@ public interface GroupsMVPContract {
   }
 
   interface Presenter {
-    Observable<List<Group>> loadGroups();
+    void loadGroups();
 
     void createGroup();
   }
