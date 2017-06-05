@@ -1,25 +1,34 @@
 package com.example.ruby.tddworkshop.ui.creategroup;
 
 import com.example.ruby.tddworkshop.data.GroupsRepository;
+import com.example.ruby.tddworkshop.util.InputValidator;
+import com.example.ruby.tddworkshop.util.InputValidatorImpl;
+import io.reactivex.Observable;
+import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-
-import static org.junit.Assert.*;
+import org.mockito.MockitoAnnotations;
 
 /**
  * Created by Ruby on 6/5/2017.
  */
 public class CreateGroupPresenterTest {
 
+  private String validGroupName = "abc";
+  private String notValidGroupName = "ab";
+
   CreateGroupPresenter presenter;
 
   @Mock CreateGroupMVPContract.View view;
   @Mock GroupsRepository groupsRepository;
+  @Mock InputValidator inputValidator;
 
   @Before public void setUp() throws Exception {
-    presenter = new CreateGroupPresenter(groupsRepository, view);
+    MockitoAnnotations.initMocks(this);
+
+    presenter = new CreateGroupPresenter(inputValidator, groupsRepository, view);
   }
 
   /**
@@ -28,6 +37,9 @@ public class CreateGroupPresenterTest {
    * @throws Exception
    */
   @Test public void createGroup_groupNameNotValid_viewShowGroupNameNotValidMsg() throws Exception {
+    //stub input validator to return false
+    Mockito.when(inputValidator.isGroupNameValid(notValidGroupName)).thenReturn(false);
+
     presenter.createGroup("ab");
 
     Mockito.verify(groupsRepository, Mockito.times(0)).createGroup(Mockito.any());
@@ -40,6 +52,9 @@ public class CreateGroupPresenterTest {
   }
 
   @Test public void createGroup_groupNameValid_callRepoCreateGroupAndViewBack() throws Exception {
+    //stub input validator to return true
+    Mockito.when(inputValidator.isGroupNameValid(validGroupName)).thenReturn(true);
+
     presenter.createGroup("abc");
 
     //verify call GroupsRepository#createGroup()
