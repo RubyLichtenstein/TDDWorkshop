@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created by Ruby on 6/5/2017.
  * use cases
  * 1. get groups emit empty list
+ *
  * 2. add 1 group -> get groups emit list with one group
  */
 
