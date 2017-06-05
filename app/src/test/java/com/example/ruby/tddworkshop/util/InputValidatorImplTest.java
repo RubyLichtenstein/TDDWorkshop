@@ -10,12 +10,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class InputValidatorImplTest {
 
-  InputValidator inputValidator;
+  private InputValidator inputValidator;
 
-  String validGroupName = "abc";
-  String notValidGroupName = "ab";
+  private String validGroupName = "abc";
+  private String notValidGroupName = "ab";
 
-  @Before public void init() {
+  @Before public void setUp() {
     inputValidator = new InputValidatorImpl();
   }
 
