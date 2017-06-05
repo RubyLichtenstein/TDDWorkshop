@@ -9,6 +9,6 @@ public class InputValidatorImpl implements InputValidator {
    * @return true if groupName.length > 2
    */
   @Override public boolean isGroupNameValid(String groupName) {
-    return false;
+    return groupName.length() > 2;
   }
 }
