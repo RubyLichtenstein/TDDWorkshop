@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -19,7 +21,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Ruby on 6/5/2017.
  */
-public class GroupsPresenterTest {
+@RunWith(MockitoJUnitRunner.class) public class GroupsPresenterTest {
 
   @Mock GroupsRepository repository;
   @Mock GroupsMVPContract.View view;
@@ -27,8 +29,6 @@ public class GroupsPresenterTest {
   GroupsPresenter groupsPresenter;
 
   @Before public void setUp() throws Exception {
-    MockitoAnnotations.initMocks(this);
-
     groupsPresenter = new GroupsPresenter(repository, view);
   }
 

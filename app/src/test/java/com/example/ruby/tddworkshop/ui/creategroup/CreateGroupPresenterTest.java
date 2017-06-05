@@ -7,14 +7,16 @@ import io.reactivex.Observable;
 import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  * Created by Ruby on 6/5/2017.
  */
-public class CreateGroupPresenterTest {
+@RunWith(MockitoJUnitRunner.class) public class CreateGroupPresenterTest {
 
   private String validGroupName = "abc";
   private String notValidGroupName = "ab";
@@ -26,8 +28,6 @@ public class CreateGroupPresenterTest {
   @Mock InputValidator inputValidator;
 
   @Before public void setUp() throws Exception {
-    MockitoAnnotations.initMocks(this);
-
     presenter = new CreateGroupPresenter(inputValidator, groupsRepository, view);
   }
 
