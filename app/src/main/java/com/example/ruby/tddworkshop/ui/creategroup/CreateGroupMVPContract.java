@@ -11,6 +11,10 @@ public interface CreateGroupMVPContract {
     Observable<CharSequence> userActionInputGroupName();
 
     Observable<Object> userActionCreateGroup();
+
+    void showMsgGroupNameNotValid();
+
+    void back();
   }
 
   interface Presenter {
